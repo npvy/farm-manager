@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express.Router();
 
-const productPricesRouter = require('./productPrices'); // Đảm bảo đường dẫn chính xác
-const customerTypesRouter = require('./customerTypes'); // Đảm bảo đường dẫn chính xác
-const productTypesRouter = require('./productTypes'); // Đảm bảo đường dẫn chính xác
-const productsRouter = require('./products'); // Đảm bảo đường dẫn chính xác
-const customersRouter = require('./customers'); // Đảm bảo đường dẫn chính xác
-const exportsRouter = require('./exports'); // Đảm bảo đường dẫn chính xác
-const inventoryRouter = require('./inventory'); // Đảm bảo đường dẫn chính xác
-const invoicesRouter = require('./invoices'); // Đảm bảo đường dẫn chính xác
+const productPricesRouter = require('./productPrices'); 
+const customerTypesRouter = require('./customerTypes'); 
+const productTypesRouter = require('./productTypes'); 
+const productsRouter = require('./products'); 
+const customersRouter = require('./customers'); 
+const exportsRouter = require('./exports'); 
+const inventoryRouter = require('./inventory'); 
+const invoicesRouter = require('./invoices'); 
 
 app.use(express.json());
 app.use('/product-prices', productPricesRouter);

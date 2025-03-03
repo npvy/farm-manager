@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hàm lấy danh sách loại sản phẩm và đổ vào select
     async function fetchProductTypes() {
         try {
-            const response = await fetch('/api/productTypes');
+            const response = await fetch('/api/product-types');
             const productTypes = await response.json();
             const modalProductTypeIdSelect = document.getElementById('modalProductTypeId');
             const modalEditProductTypeIdSelect = document.getElementById('modalEditProductTypeId');
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hàm lấy danh sách sản phẩm và hiển thị
     async function fetchProducts() {
         try {
-            const response = await fetch('/products/with-types');
+            const response = await fetch('/api/products');
             const products = await response.json();
             const tableBody = document.getElementById('productsTable').querySelector('tbody');
             tableBody.innerHTML = '';
@@ -33,9 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
             products.forEach(product => {
                 const row = tableBody.insertRow();
                 row.innerHTML = `
-                    <td>${product.product_id}</td>
                     <td>${product.product_name}</td>
                     <td>${product.product_type_name}</td>
+                    <td>${product.customer_type_name}</td>
+                    <td>${product.unit_price || ''}</td>
                     <td>${product.description || ''}</td>
                     <td>
                         <button class="editBtn" data-id="${product.product_id}"><i class="fas fa-edit"></i></button>
@@ -61,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const productPrice = document.getElementById('modalProductPrice').value;
 
         try {
-            await fetch('/products', {
+            await fetch('/api/products', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -87,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.classList.contains('editBtn')) {
             const productId = event.target.dataset.id;
             try {
-                const response = await fetch(`/products/${productId}`);
+                const response = await fetch(`/api/products/${productId}`);
                 const product = await response.json();
 
                 document.getElementById('modalEditProductId').value = product.product_id;
@@ -111,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const productPrice = document.getElementById('modalEditProductPrice').value;
 
         try {
-            await fetch(`/products/${productId}`, {
+            await fetch(`/api/products/${productId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -141,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('modalDeleteProductBtn').addEventListener('click', async () => {
         const productId = document.getElementById('modalDeleteProductBtn').dataset.id;
         try {
-            await fetch(`/products/${productId}`, { method: 'DELETE' });
+            await fetch(`/api/products/${productId}`, { method: 'DELETE' });
             fetchProducts();
             document.getElementById('deleteProductModal').style.display = 'none';
         } catch (error) {
