@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Sản Phẩm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo-container"><img src="./Image/Logo.jpg" alt="Logo của bạn" class="logo"></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="products.html">Sản Phẩm</a></li>
+                    <li><a href="#">Khách Hàng</a></li>
+                    <li><a href="#">Đơn Hàng</a></li>
+                    <li><a href="#">Báo Cáo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Quản Lý Sản Phẩm</h1>
+
+        <button id="addProductBtn" class="add-product-btn"><i class="fas fa-plus"></i> Thêm Sản Phẩm</button>
+
+        <table id="productsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Loại Sản Phẩm</th>
+                    <th>Mô Tả</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div id="addProductModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Thêm Sản Phẩm</h2>
+                <div class="form-group">
+                    <label for="modalProductName">Tên sản phẩm:</label>
+                    <input type="text" id="modalProductName" placeholder="Tên sản phẩm">
+                </div>
+                <div class="form-group">
+                    <label for="modalProductTypeId">Loại sản phẩm:</label>
+                    <select id="modalProductTypeId"></select>
+                </div>
+                <div class="form-group">
+                    <label for="modalProductDescription">Mô tả:</label>
+                    <textarea id="modalProductDescription" placeholder="Mô tả"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="modalProductPrice">Giá sản phẩm:</label>
+                    <input type="number" id="modalProductPrice" placeholder="Giá sản phẩm">
+                </div>
+                <button id="modalAddProductBtn" class="add-btn"><i class="fas fa-plus"></i> Thêm</button>
+            </div>
+        </div>
+
+        <div id="editProductModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Sửa Sản Phẩm</h2>
+                <div class="form-group">
+                    <label for="modalEditProductName">Tên sản phẩm:</label>
+                    <input type="hidden" id="modalEditProductId">
+                    <input type="text" id="modalEditProductName" placeholder="Tên sản phẩm">
+                </div>
+                <div class="form-group">
+                    <label for="modalEditProductTypeId">Loại sản phẩm:</label>
+                    <select id="modalEditProductTypeId"></select>
+                </div>
+                <div class="form-group">
+                    <label for="modalEditProductDescription">Mô tả:</label>
+                    <textarea id="modalEditProductDescription" placeholder="Mô tả"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="modalEditProductPrice">Giá sản phẩm:</label>
+                    <input type="number" id="modalEditProductPrice" placeholder="Giá sản phẩm">
+                </div>
+                <button id="modalUpdateProductBtn" class="update-btn"><i class="fas fa-save"></i> Cập Nhật</button>
+            </div>
+        </div>
+
+        <div id="deleteProductModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Xác Nhận Xóa</h2>
+                <p>Bạn có chắc chắn muốn xóa sản phẩm này?</p>
+                <button id="modalDeleteProductBtn" class="delete-btn"><i class="fas fa-trash-alt"></i> Xóa</button>
+                <button id="modalCancelDeleteBtn" class="cancel-btn"><i class="fas fa-times"></i> Hủy</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="products.js"></script>
+</body>
+</html>
