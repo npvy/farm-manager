@@ -41,12 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Cập nhật bảng đơn hàng gần đây
             updateExportsTable(exportsData, productTypeMap, customerTypeMap);
 
-            // Lấy dữ liệu sản phẩm
-            const productsData = await fetch('/api/products').then(res => res.json());
-
-            // Cập nhật bảng sản phẩm
-            updateProductsTable(productsData, productTypeInfoMap);
-
+           
             // Lấy dữ liệu khách hàng
             const customersData = await fetch("/api/customers").then(res => res.json());
 
@@ -82,23 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function updateProductsTable(data, productTypeInfoMap) {
-        const productsTableBody = document.querySelector('#productsTable tbody');
-        productsTableBody.innerHTML = '';
-    
-        data.forEach(product => {
-            const row = productsTableBody.insertRow();
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            const cell3 = row.insertCell(2);
-            const cell4 = row.insertCell(3);
-    
-            cell1.textContent = product.product_name;
-            cell2.textContent = product.product_type_name;
-            cell3.textContent = product.customer_type_name || 'Chưa xác định';
-            cell4.textContent = product.unit_price || 'Chưa có giá';
-        });
-    }
 
     function updateCustomersTable(data, customerTypeInfoMap) {
         const customersTableBody = document.querySelector('#customersTable tbody');

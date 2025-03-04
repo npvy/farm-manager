@@ -1,12 +1,30 @@
-
 .header, .main, footer {
     padding: 20px 0;
 }
 
 .container {
-    width: 90%;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px;
+}
+
+.dashboard-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.dashboard-items .item {
+    flex: 1 1 120px;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.latest-orders table,
+.customers table {
+    width: 100%;
 }
 
 header {
@@ -21,6 +39,7 @@ header {
 .header-content {
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Thanh điều hướng sang phải */
 }
 
 .logo {
@@ -29,7 +48,6 @@ header {
     vertical-align: middle;
     border-radius: 50%;
     overflow: hidden;
-    margin-right: 30px; /* Thêm khoảng cách giữa logo và thanh điều hướng */
 }
 
 nav ul {
@@ -64,19 +82,6 @@ nav ul li a.active {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-.dashboard-items {
-    display: flex; /* Sử dụng Flexbox */
-    flex-wrap: wrap; /* Cho phép các mục xuống dòng nếu không đủ chỗ */
-}
-
-.dashboard-items .item {
-    flex: 1 1 150px; /* Mỗi mục chiếm một phần không gian, chiều rộng tối thiểu 150px */
-    margin: 10px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    text-align: center;
-}
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -95,13 +100,11 @@ th {
 footer {
     background-color: #eee;
     text-align: center;
-    margin-top: 50px; /* Thêm khoảng cách phía trên footer */
-    padding-top: 20px; /* Thêm khoảng cách bên trong footer */
-    border-top: 1px solid #ccc; /* Thêm đường kẻ ngang phía trên footer (tùy chọn) */
-       
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     nav ul {
         text-align: center;
@@ -111,10 +114,6 @@ footer {
         display: block;
         margin: 10px 0;
     }
-
-    .dashboard-items .item {
-        width: 100%;
-    }
 }
 
 body {
@@ -123,25 +122,11 @@ body {
     padding: 20px;
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
+    table-layout: fixed;
 }
 
 .add-product-btn {
@@ -184,63 +169,89 @@ th {
 .close:focus {
     color: black;
     text-decoration: none;
-    cursor: pointer;
-}
+    cursor: pointer;}
 
-.form-group {
-    margin-bottom: 15px;
-}
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: calc(100% - 12px);
+        padding: 6px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    
+    .add-btn,
+    .update-btn,
+    .delete-btn,
+    .cancel-btn {
+        padding: 10px 15px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .add-btn,
+    .update-btn {
+        background-color: #28a745;
+        color: #fff;
+    }
+    
+    .delete-btn {
+        background-color: #dc3545;
+        color: #fff;
+    }
+    
+    .cancel-btn {
+        background-color: #6c757d;
+        color: #fff;
+    }
+    
+    #danh-sach-san-pham, #danh-sach-xuat-kho, #danh-sach-khach-hang {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 10px;
+    }
+    
+    .div-san-pham, .div-xuat-kho, .div-khach-hang {
+        border: 1px solid #eee;
+        padding: 10px;
+    }
+    
+    #pagination {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    
+    #pagination button, #pagination span {
+        margin: 0 5px;
+    }
+    
+    #customersTable th:nth-child(3),
+    #customersTable td:nth-child(3) {
+        width: 210px;
+        word-break: break-all;
+    }
+    
+    #customersTable {
+        table-layout: fixed;
+    }
 
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: calc(100% - 12px);
-    padding: 6px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.add-btn,
-.update-btn,
-.delete-btn,
-.cancel-btn {
-    padding: 10px 15px;
-    margin: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.add-btn,
-.update-btn {
-    background-color: #28a745;
-    color: #fff;
-}
-
-.delete-btn {
-    background-color: #dc3545;
-    color: #fff;
-}
-
-.cancel-btn {
-    background-color: #6c757d;
-    color: #fff;
-}
-
-
-#danh-sach-san-pham, #danh-sach-xuat-kho, #danh-sach-khach-hang {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 10px;
-}
-
-.div-san-pham, .div-xuat-kho, .div-khach-hang {
-    border: 1px solid #eee;
-    padding: 10px;
-}
+    #productsTable th:last-child, /* Cột chứa nút Xóa và Sửa */
+    #productsTable td:last-child {
+        text-align: center; /* Căn giữa nội dung cột */
+        white-space: nowrap; /* Ngăn các nút xuống dòng */
+        width: 80px; /* Đặt độ rộng cố định cho cột */
+    }
