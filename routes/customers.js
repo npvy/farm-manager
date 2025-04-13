@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Lấy thông tin chi tiết khách hàng
+// Lấy thông tin chi tiết 1 khách hàng
 router.get('/:id', async (req, res) => {
     const customerId = req.params.id;
     try {
@@ -50,14 +50,14 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// Tìm kiếm khách hàng theo tên
+// Tìm kiếm khách hàng theo tên hoặc số điện thoại
 router.get('/search', async (req, res) => {
-    const customerName = req.query.name;
-    if (!customerName) {
-        return res.status(400).send({ message: 'Tên khách hàng không được để trống' });
+    const customerInfo = req.query.name;
+    if (!customerInfo) {
+        return res.status(400).send({ message: 'Tên/SĐT khách hàng không được để trống' });
     }
     try {
-        const [rows] = await pool.query('SELECT * FROM Customers WHERE customer_name LIKE ?', [`%${customerName}%`]);
+        const [rows] = await pool.query('SELECT * FROM Customers WHERE customer_name LIKE ? OR phone LIKE ?', [`%${customerInfo}%`]);
         res.send(rows);
     } catch (err) {
         console.error(err);

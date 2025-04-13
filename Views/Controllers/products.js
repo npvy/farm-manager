@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let filterProductTypeId = '';
     let filterCustomerTypeId = '';
 
-    // Hàm lấy danh sách loại sản phẩm và đổ vào select
+    // Hàm lấy danh sách loại sản phẩm và đổ vào FILTER
     async function fetchProductTypes() {
         try {
             const response = await fetch('/api/product-types');
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Hàm lấy danh sách loại khách hàng và đổ vào select
+    // Hàm lấy danh sách loại khách hàng và đổ vào FILTER
     async function fetchCustomerTypes() {
         try {
             const response = await fetch('/api/customer-types');
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Filter sản phẩm (hiển thị modal)
+    // Cập nhật sản phẩm (hiển thị modal)
     document.getElementById('productsTable').addEventListener('click', async (event) => {
         if (event.target.classList.contains('editBtn')) {
             const productId = event.target.dataset.id;

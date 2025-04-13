@@ -25,11 +25,11 @@ router.post('/', [
 });
 
 
-// Lấy danh sách sản phẩm
+// Lấy danh sách tất cả sản phẩm
 router.get('/', async (req, res) => {
     try {
         const [rows] = await pool.query(
-        'SELECT p.product_id as product_id, p.product_name as product_name, pt.product_type_name as product_type_name, pp.unit_price as unit_price, ct.customer_type_name as customer_type_name, p.description as description FROM Products p JOIN ProductTypes pt ON p.product_type_id = pt.product_type_id LEFT JOIN ProductPrices pp ON p.product_id = pp.product_id LEFT JOIN CustomerTypes ct ON pp.customer_type_id = ct.customer_type_id'
+        'SELECT * FROM Products'
        );
         res.send(rows);
     } catch (err) {
@@ -38,7 +38,8 @@ router.get('/', async (req, res) => {
     }
 }); 
 
-// Lấy danh sách sản phẩm đầy đủ thông yin
+
+// Lấy danh sách tất cả sản phẩm có đầy đủ thông tin
 router.get('/details', async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
@@ -96,11 +97,12 @@ router.get('/details', async (req, res) => {
     }
 });
 
-// Lấy thông tin chi tiết sản phẩm
+
+// Lấy thông tin 1 sản phẩm
 router.get('/:id', async (req, res) => {
     const productId = req.params.id;
     try {
-        const [rows] = await pool.query('SELECT * FROM Products WHERE product_id = ?', [productrId]);
+        const [rows] = await pool.query('SELECT * FROM Products WHERE product_id = ?', [productId]);
         if (rows.length === 0) return res.status(404).send({ message: 'Không tìm thấy sản phẩm' });
         res.send(rows[0]);
     } catch (err) {
@@ -110,7 +112,7 @@ router.get('/:id', async (req, res) => {
 });
 
 
-// Lấy thông tin chi tiết sản phẩm đầy đủ thông tin
+// Lấy thông tin chi tiết đầy đủ của 1 sản phẩm
 router.get('/details/:id', async (req, res) => {
     const productId = req.params.id;
     try {

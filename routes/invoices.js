@@ -59,7 +59,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Lấy thông tin chi tiết hóa đơn
+// Lấy thông tin 1 hóa đơn
 router.get('/:id', async (req, res) => {
     const invoiceId = req.params.id;
     try {
@@ -71,6 +71,7 @@ router.get('/:id', async (req, res) => {
         res.status(500).send(err);
     }
 });
+
 
 // Sửa hóa đơn
 router.put('/:id', async (req, res) => {

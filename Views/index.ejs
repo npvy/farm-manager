@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <header>
         <div class="container header-content">
-            <a href="index.html" class="logo-container"><img src="./Image/Logo.jpg" alt="Logo của bạn" class="logo"></a>
+            <a href="/" class="logo-container"><img src="/Image/Logo.jpg" alt="Logo của bạn" class="logo"></a>
             <nav>
                 <ul>
-                    <li><a href="/products.html">Sản Phẩm</a></li>
-                    <li><a href="/customers.html">Khách Hàng</a></li>
-                    <li><a href="/exports.html">Đơn Hàng</a></li>
-                    <li><a href="/inventory.html">Kho Hàng</a></li>
-                    <li><a href="/reports.html">Báo Cáo</a></li>
+                    <li><a href="/products">Sản Phẩm</a></li>
+                    <li><a href="/customers">Khách Hàng</a></li>
+                    <li><a href="/exports">Đơn Hàng</a></li>
+                    <li><a href="/inventory">Kho Hàng</a></li>
+                    <li><a href="/reports">Báo Cáo</a></li>
                 </ul>
             </nav>
         </div>
@@ -29,53 +29,55 @@
                 <div class="dashboard-items">
                     <div class="item">
                         <h3>Tổng Sản Phẩm</h3>
-                        <p id="totalProducts">Đang tải...</p>
+                        <p><%= totalProducts %></p>
                     </div>
                     <div class="item">
                         <h3>Tổng Khách Hàng</h3>
-                        <p id="totalCustomers">Đang tải...</p>
+                        <p><%= totalCustomers %></p>
                     </div>
                     <div class="item">
                         <h3>Tổng Loại Sản Phẩm</h3>
-                        <p id="totalProductTypes">Đang tải...</p>
+                        <p><%= totalProductTypes %></p>
                     </div>
                     <div class="item">
                         <h3>Tổng Loại Khách Hàng</h3>
-                        <p id="totalCustomerTypes">Đang tải...</p>
+                        <p><%= totalCustomerTypes %></p>
                     </div>
                     <div class="item">
                         <h3>Tổng Tồn Kho</h3>
-                        <p id="totalInventory">Đang tải...</p>
+                        <p><%= totalInventory %></p>
                     </div>
                     <div class="item">
                         <h3>Tổng Đơn Hàng</h3>
-                        <p id="totalExports">Đang tải...</p>
+                        <p><%= totalExports %></p>
                     </div>
                 </div>
             </section>
 
             <section class="latest-orders">
-                <h2>Đơn Hàng Gần Đây</h2>
-                <table id="invoicesDetailTable">
+                <h2>Top 10 Đơn Hàng Gần Đây</h2>
+                <table id="exportsTable">
                     <thead>
                         <tr>
+                            <th>Mã Hóa Đơn</th>
                             <th>Khách Hàng</th>
-                            <th>Sản Phẩm</th>
-                            <th>Số lượng</th>
-                            <th>Giá</th>
+                            <th>Tổng Số Sản Phẩm</th>
+                            <th>Tổng Số lượng</th>
                             <th>Tổng Tiền</th>
                             <th>Ngày Đặt</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Đang tải...</td>
-                            <td>Đang tải...</td>
-                            <td>Đang tải...</td>
-                            <td>Đang tải...</td>
-                            <td>Đang tải...</td>
-                            <td>Đang tải...</td>
-                        </tr>
+                        <% latestExports.forEach(exportItem => { %>
+                            <tr>
+                                <td><%= exportItem.invoice_id %></td>
+                                <td><%= exportItem.customer_name %></td>
+                                <td><%= exportItem.so_san_pham %></td>
+                                <td><%= exportItem.tong_so_luong %></td>
+                                <td><%= exportItem.order_total %></td>
+                                <td><%= new Date(exportItem.invoice_date).toLocaleDateString() %></td>
+                            </tr>
+                        <% }); %>
                     </tbody>
                 </table>
             </section>
@@ -93,19 +95,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Đang tải...</td>
-                            <td>Đang tải...</td>
-                            <td>Đang tải...</td>
-                            <td>Đang tải...</td>
-                            <td>Đang tải...</td>
-                        </tr>
+                        <% customers.forEach(customer => { %>
+                            <tr>
+                                <td><%= customer.customer_name %></td>
+                                <td><%= customer.customer_type_name %></td>
+                                <td><%= customer.email %></td>
+                                <td><%= customer.phone %></td>
+                                <td><%= customer.address %></td>
+                            </tr>
+                        <% }); %>
                     </tbody>
                 </table>
             </section>
         </div>
     </main>
-    <script src="./Controllers/script.js"></script>
+    <script src="/Routes/index.js"></script>
 </body>
 <footer>
     <div class="container">
